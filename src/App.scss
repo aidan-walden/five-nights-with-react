@@ -1,16 +1,11 @@
-/* 1. Use a more-intuitive box-sizing model */
+/* Reset and base styles */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* 2. Remove default margin */
-* {
-  margin: 0;
-}
-
-/* 3. Enable keyword animations */
+/* Enable keyword animations */
 @media (prefers-reduced-motion: no-preference) {
   html {
     interpolate-size: allow-keywords;
@@ -18,71 +13,65 @@
 }
 
 body {
-  /* 4. Add accessible line-height */
   line-height: 1.5;
-  /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
 }
 
-/* 6. Improve media defaults */
+/* Improve media defaults */
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
 }
 
-/* 7. Inherit fonts for form controls */
+/* Inherit fonts for form controls */
 input, button, textarea, select {
   font: inherit;
 }
 
-/* 8. Avoid text overflows */
+/* Avoid text overflows */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
-/* 9. Improve line wrapping */
+/* Improve line wrapping */
 p {
   text-wrap: pretty;
 }
+
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-/*
-  10. Create a root stacking context
-*/
+/* Create a root stacking context */
 #root, #__next {
   isolation: isolate;
 }
 
+/* Root layout */
 html, body, #root {
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
+/* Full background container */
 .full-background {
   width: 100%;
-  height: 100dvh;
+  height: 100vh;
   background-color: black;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
+/* Warning animation */
 @keyframes fadeWarning {
-  0% {
-    opacity: 0%;
-  } 
-
-  50% {
-    opacity: 100%;
-  }
-
-  100% {
-    opacity: 0%;
-  }
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 .jumpscare-warning {
@@ -90,32 +79,85 @@ html, body, #root {
   text-align: center;
   width: 100%;
   height: 100%;
-  padding: 20px;
-  font-family: Consolas,monaco,monospace; 
+  padding: 1.25rem;
+  font-family: Consolas, monaco, monospace;
   font-size: 24px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   animation: fadeWarning 5s forwards;
   animation-timing-function: cubic-bezier(1, 0, 0, 1);
 }
 
+/* Main menu styles */
 .main-menu-container {
-  width: inherit;
-  height: inherit;
   position: absolute;
   left: 13.5%;
   top: 10%;
-}
-
-.main-menu-container > *:last-child {
-  margin-bottom: 10px;
-}
-
-.main-menu-title {
+  font-size: 48px;
+  font-family: Consolas, monaco, monospace;
   color: white;
+}
+
+.main-menu-text {
   text-align: left;
   width: 100%;
-  font-size: 20px;
-  font-family: Consolas,monaco,monospace; 
+  font-family: Consolas, monaco, monospace;
+  font-size: inherit;
+
+  &.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: right;
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.main-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  padding: 1.25rem 0 0 0;
+  margin: 1rem 0 0 0;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    width: fit-content;
+    position: relative;
+    text-align: left;
+
+    &:hover {
+      &::before {
+        content: ">>";
+        position: absolute;
+        left: -1.5em;
+        top: 0;
+        display: inline;
+      }
+    }
+  }
+}
+
+.main-menu-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.5;
 }
