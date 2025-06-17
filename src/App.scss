@@ -62,29 +62,60 @@ html, body, #root {
   padding: 0;
 }
 
-.app-container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+.full-background {
+  width: 100%;
+  height: 100dvh;
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.jumpscare-background {
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes fadeWarning {
+  0% {
+    opacity: 0%;
+  } 
+
+  50% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
 }
 
 .jumpscare-warning {
   color: white;
   text-align: center;
   width: 100%;
+  height: 100%;
   padding: 20px;
-  font-weight: bold;
+  font-family: Consolas,monaco,monospace; 
   font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeWarning 5s forwards;
+  animation-timing-function: cubic-bezier(1, 0, 0, 1);
+}
+
+.main-menu-container {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  left: 13.5%;
+  top: 10%;
+}
+
+.main-menu-container > *:last-child {
+  margin-bottom: 10px;
+}
+
+.main-menu-title {
+  color: white;
+  text-align: left;
+  width: 100%;
+  font-size: 20px;
+  font-family: Consolas,monaco,monospace; 
 }

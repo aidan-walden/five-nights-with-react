@@ -1,7 +1,28 @@
-function Warning() {
+import { useEffect, useRef } from "react";
+import { SceneId } from "../App";
+
+function Warning({ changeScene }: { changeScene: (scene: SceneId) => void }) {
+
+    const elementRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const element = elementRef.current;
+
+        const handleAnimationEnd = () => {
+            console.log("animation over");
+            changeScene(SceneId.MainMenu);
+        };
+
+        element?.addEventListener('animationend', handleAnimationEnd);
+
+        return () => {
+            element?.removeEventListener('animationend', handleAnimationEnd);
+        }
+    })
+
     return (
-        <div className="jumpscare-background">
-            <div className="jumpscare-warning">
+        <div className="full-background">
+            <div className="jumpscare-warning" ref={elementRef}>
                 <p>WARNING!</p>
                 <br />
                 <p>This game contains flashing lights, loud noises, and lots of jumpscares!</p>
