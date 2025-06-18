@@ -74,6 +74,16 @@ html, body, #root {
   100% { opacity: 0; }
 }
 
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .jumpscare-warning {
   color: white;
   text-align: center;
@@ -160,4 +170,18 @@ html, body, #root {
   object-fit: cover;
   z-index: -1;
   opacity: 0.5;
+}
+
+.fade-out {
+  animation: fadeOut 3s forwards;
+}
+
+.fade-in {
+  animation: fadeIn 3s forwards;
+}
+
+.newspaper-ad {
+  visibility: hidden;
+  z-index: 10;
+  background-image: url(/fnaf_assets/mainmenu/bg/newspaper.png);
 }
