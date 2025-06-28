@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { useScene, SceneId } from "../App";
 
 function MainMenu() {
-
+    const { changeScene } = useScene();
     const [backgroundImage, setBackgroundImage] = useState("/fnaf_assets/mainmenu/bg/0.png");
 
     useEffect(() => {
@@ -14,7 +15,13 @@ function MainMenu() {
         
         setBackgroundImage(BASE_IMAGE);
 
+        let shouldChangeBackground = true;
+
         function changeBackground() {
+            if (!shouldChangeBackground) {
+                return;
+            }
+
             const randomIndex = Math.floor(Math.random() * backgroundImages.length);
             setTimeout(() => {
                 setBackgroundImage(backgroundImages[randomIndex]);
@@ -30,6 +37,10 @@ function MainMenu() {
         }
 
         changeBackground();
+
+        return () => {
+            shouldChangeBackground = false;
+        }
     }, []);
 
     const newGame = () => {
@@ -45,6 +56,11 @@ function MainMenu() {
         const newspaper = document.querySelector(".newspaper-ad");
         newspaper?.classList.add("fade-in");
         (newspaper as HTMLElement).style.visibility = "visible";
+        newspaper?.addEventListener('animationend', () => {
+            setTimeout(() => {
+                changeScene(SceneId.NightSplash);
+            }, 1000 * 3);
+        });
     }
 
     return (

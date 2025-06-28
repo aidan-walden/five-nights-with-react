@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { SceneId } from "../App";
+import { useScene, SceneId } from "../App";
 
-function Warning({ changeScene }: { changeScene: (scene: SceneId) => void }) {
-
+function Warning() {
+    const { changeScene } = useScene();
     const elementRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
